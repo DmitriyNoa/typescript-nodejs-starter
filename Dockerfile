@@ -11,7 +11,6 @@ COPY tsconfig.json tsconfig.json
 COPY tslint.json tslint.json
 COPY package-lock.json package-lock.json
 COPY src src
-COPY types types
 
 RUN npm i
 RUN npm run build
