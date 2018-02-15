@@ -3,7 +3,7 @@ import * as http from "http";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 import * as dotenv from "dotenv";
-
+import * as logger from "morgan";
 /* Create a reusable server class that will bootstrap basic express application. */
 export class Server {
   /* protected member will be accessible from deriving classes.  */
@@ -32,7 +32,8 @@ export class Server {
     // set bodyParser middleware to get form data
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-
+    // HTTP requests logger
+    this.app.use(logger("dev"));
     this.server = http.createServer(this.app);
 
     if (!process.env.PRODUCTION) {
