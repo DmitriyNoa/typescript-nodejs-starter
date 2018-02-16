@@ -15,12 +15,18 @@
     "@types/body-parser": "^1.16.8",
     "@types/dotenv": "^4.0.2",
     "@types/express": "^4.11.1",
+    "@types/jest": "^22.1.2",
     "@types/mongodb": "^3.0.5",
     "@types/mongoose": "^5.0.2",
     "@types/morgan": "^1.7.35",
     "@types/socket.io": "^1.4.31",
+    "@types/supertest": "^2.0.4",
     "@types/uuid": "^3.4.3",
+    "jest": "^22.3.0",
     "nodemon": "^1.14.12",
+    "supertest": "^3.0.0",
+    "ts-jest": "^22.0.4",
+    "tslint": "^5.9.1",
     "typescript": "^2.7.1"
   },
   "repository": {
@@ -31,11 +37,29 @@
     "start": "node ./dist/app.js",
     "start_local": "nodemon ./dist/app.js",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit"
   },
   "author": {
     "name": "DmitriyNoa",
     "email": "dmytro.zharkov@gmail.com"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/test/**/*.test.(ts|js)"
+    ],
+    "testEnvironment": "node"
   },
   "license": "MIT"
 }
