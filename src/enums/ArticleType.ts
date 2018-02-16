@@ -1,8 +1,8 @@
 enum ArticleType {
-  Fashion = 0,
-  Electronic = 1,
-  Digital = 2,
-  Oher = 3
+  Fashion = "Fasion",
+  Electronic = "Electronic",
+  Digital = "Digital",
+  Oher = "Other"
 }
 
 export default ArticleType;

@@ -15,7 +15,7 @@ class ArticlesRoute {
   }
 
   // Putting all routes into one place makes it easy to search for specific functionality
-  // As this method will be called in a context of a different class, we need to bind methods objects to current class.
+  // As some methods will be called in a context of a different class instance, we need to bind thos methods to current class.
 
   public init() {
     this.router.route("/")
@@ -29,6 +29,7 @@ class ArticlesRoute {
   }
 
   public getArticles(request: Request, response: Response): void {
+    // I'm not a huge fan of JavaScript callbacks hell and expecially of using it in NodeJS, so I'll use promises instead.
     ArticleModel.find()
       .then((articles: IFashionArticleModel[]) => {
         return response.json(articles);
@@ -43,12 +44,12 @@ class ArticlesRoute {
     ArticleModel
       .findById(id)
       .then((article: IFashionArticleModel) => {
-      return response.json(article);
-    })
+        return response.json(article);
+      })
       .catch((error: Error) => {
         console.error(error);
         return response.status(400).json({ error: error });
-    });
+      });
   }
 
   public createArticle(request: Request, response: Response): void {
@@ -92,7 +93,7 @@ class ArticlesRoute {
 
   public deleteArticle(request: Request, response: Response): void {
     const articleId = request.params.id;
-     ArticleModel.findByIdAndRemove(articleId)
+    ArticleModel.findByIdAndRemove(articleId)
       .then((res: any) => {
         return response.status(204).end();
       })

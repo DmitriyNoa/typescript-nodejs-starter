@@ -6,8 +6,9 @@ import * as dotenv from "dotenv";
 import * as logger from "morgan";
 /* Create a reusable server class that will bootstrap basic express application. */
 export class Server {
+
+  /* Most of the core properties belove have their types defined by already existing interfaces. IDEs users can jump directly to   interface definition by clicking on its name.  */
   /* protected member will be accessible from deriving classes.  */
-  /* express application interface explicitly sets a typo of the app property, IDEs users can jump directly to interface definition by clicking on it's name.  */
   protected app: express.Application;
   /* And here we are using http module Server class as a type. */
   protected server: http.Server;
@@ -15,6 +16,8 @@ export class Server {
   private db: mongoose.Connection;
 
   /* restrict member scope to Server class only */
+  /*  This could be done using generics like syntaxis. You can choose which is looking better for you
+  private routes: Array<express.Router> = []; */
   private routes: express.Router[] = [];
 
   /* public modifier is a default and can be omitted. I prefer to always set it, so code  style is more consistent. */

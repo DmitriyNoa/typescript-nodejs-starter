@@ -13,5 +13,6 @@ const ArticleSchema: Schema = new Schema({
   SKU: String
 });
 
+// Use Model generic from mongoose to create a model of IFashionArticle type.
 const ArticleModel: Model<IFashionArticleModel> = model<IFashionArticleModel>("Article", ArticleSchema);
 export {ArticleModel};

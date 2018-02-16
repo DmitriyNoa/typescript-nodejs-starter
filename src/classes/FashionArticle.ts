@@ -1,11 +1,11 @@
-import AbstractArticle from "./AbstractArticle";
+import AbstractActrticle from "./AbstractArticle";
 import ArticleType from "../enums/ArticleType";
 import Colors from "../enums/Colors";
 import IFashionArticle from "../interfaces/IFashionArticle";
 import IPrice from "../interfaces/IPrice";
 import Sizes from "../enums/Sizes";
 
-class FashionArticle extends AbstractArticle implements IFashionArticle {
+class FashionArticle extends AbstractActrticle implements IFashionArticle {
   constructor(public name: string,
               public type: ArticleType,
               public size: Sizes,
