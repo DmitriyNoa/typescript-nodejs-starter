@@ -56,14 +56,7 @@ class ArticlesRoute {
     const requestBody = request.body;
     const article = new FashionArticle(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price);
 
-    const articeModel = new ArticleModel({
-      name:  article.name,
-      type:  article.type,
-      size:  article.size,
-      color: article.color,
-      price: article.price,
-      SKU:   article.SKU
-    });
+    const articeModel = new ArticleModel(article);
 
     articeModel
       .save()
