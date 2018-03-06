@@ -9,6 +9,7 @@
     "mongoose": "^5.0.5",
     "morgan": "^1.9.0",
     "socket.io": "^2.0.4",
+    "ts-node": "^5.0.1",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
@@ -42,6 +43,7 @@
     "watch-ts": "tsc -w",
     "build-ts": "tsc",
     "build": "npm run build-ts && npm run tslint",
+    "serve-debug": "nodemon --inspect ./dist/app.js",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest --forceExit"
   },
