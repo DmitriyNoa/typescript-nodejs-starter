@@ -22,6 +22,7 @@
     "@types/socket.io": "^1.4.31",
     "@types/supertest": "^2.0.4",
     "@types/uuid": "^3.4.3",
+    "concurrently": "^3.5.1",
     "jest": "^22.3.0",
     "nodemon": "^1.14.12",
     "supertest": "^3.0.0",
@@ -35,8 +36,13 @@
   },
   "scripts": {
     "start": "node ./dist/app.js",
-    "start_local": "nodemon ./dist/app.js",
-    "build": "tsc",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve\"",
+    "serve": "nodemon ./dist/app.js",
+    "start_local": "npm run build && npm run watch",
+    "watch-ts": "tsc -w",
+    "build-ts": "tsc",
+    "build": "npm run build-ts && npm run tslint",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest --forceExit"
   },
   "author": {

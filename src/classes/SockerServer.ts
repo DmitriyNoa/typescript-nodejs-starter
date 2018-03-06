@@ -8,7 +8,7 @@ class SocketServer extends Server {
 
   constructor(public port: number) {
     super(port);
-    this.socketServer.on('connection', (client) => {
+    this.socketServer.on("connection", (client) => {
       console.log("New connection established");
     });
 

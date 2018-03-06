@@ -1,13 +1,13 @@
 // put basic properties into abstract class.
 
 import ArticleType from "../enums/ArticleType";
-import IBaseArticle from "../interfaces/IBaseArticle";
+import BaseArticle from "../interfaces/BaseArticle";
 import * as uuid from "uuid";
-import IPrice from "../interfaces/IPrice";
+import Price from "../interfaces/Price";
 
-abstract class AbstractActrticle implements IBaseArticle {
+abstract class AbstractActrticle implements BaseArticle {
   public SKU: string;
-  constructor(public name: string, public type: ArticleType, public price: IPrice, SKU: string) {
+  constructor(public name: string, public type: ArticleType, public price: Price, SKU: string) {
     this.SKU = SKU ? SKU : uuid.v4();
   }
 }

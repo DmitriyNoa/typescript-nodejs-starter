@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express";
 import ArticleType from "../enums/ArticleType";
 import Colors from "../enums/Colors";
-import FashionArticle from "../classes/FashionArticle";
+import Shoe from "../classes/Shoe";
 import Sizes from "../enums/Sizes";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
-import IFashionArticleModel from "../interfaces/IFashionArticleModel";
+import FashionArticleModel from "../interfaces/FashionArticleModel";
 
 class ArticlesRoute {
   public router: Router;
@@ -31,19 +31,19 @@ class ArticlesRoute {
   public getArticles(request: Request, response: Response): void {
     // I'm not a huge fan of JavaScript callbacks hell and expecially of using it in NodeJS, so I'll use promises instead.
     ArticleModel.find()
-      .then((articles: IFashionArticleModel[]) => {
+      .then((articles: FashionArticleModel[]) => {
         return response.json(articles);
       })
       .catch((errror: Error) => {
         console.error(errror);
-      })
+      });
   }
 
   public getArticleById(request: Request, response: Response): void {
     const id = request.params.id;
     ArticleModel
       .findById(id)
-      .then((article: IFashionArticleModel) => {
+      .then((article: FashionArticleModel) => {
         return response.json(article);
       })
       .catch((error: Error) => {
@@ -54,13 +54,13 @@ class ArticlesRoute {
 
   public createArticle(request: Request, response: Response): void {
     const requestBody = request.body;
-    const article = new FashionArticle(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price);
+    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price);
 
     const articeModel = new ArticleModel(article);
 
     articeModel
       .save()
-      .then((createdArticle: IFashionArticleModel) => {
+      .then((createdArticle: FashionArticleModel) => {
         return response.json(createdArticle);
       })
       .catch((error: Error) => {
@@ -72,16 +72,16 @@ class ArticlesRoute {
   public updateArticle(request: Request, response: Response): void {
     const id = request.params.id;
     const requestBody = request.body;
-    const article = new FashionArticle(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price, requestBody.SKU);
+    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price, requestBody.SKU);
 
     ArticleModel.findByIdAndUpdate(id, article)
-      .then((updatedArticle: IFashionArticleModel) => {
+      .then((updatedArticle: FashionArticleModel) => {
         return response.json(updatedArticle);
       })
       .catch((error: Error) => {
         console.error(error);
         return response.json({ err: error });
-      })
+      });
   }
 
   public deleteArticle(request: Request, response: Response): void {

@@ -1,5 +1,5 @@
-import { Schema, Model, model} from "mongoose";
-import IFashionArticleModel from "../interfaces/IFashionArticleModel";
+import { Schema, Model, model } from "mongoose";
+import FashionArticleModel from "../interfaces/FashionArticleModel";
 
 const ArticleSchema: Schema = new Schema({
   name: String,
@@ -14,5 +14,5 @@ const ArticleSchema: Schema = new Schema({
 });
 
 // Use Model generic from mongoose to create a model of IFashionArticle type.
-const ArticleModel: Model<IFashionArticleModel> = model<IFashionArticleModel>("Article", ArticleSchema);
+const ArticleModel: Model<FashionArticleModel> = model<FashionArticleModel>("Article", ArticleSchema);
 export {ArticleModel};

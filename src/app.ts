@@ -1,5 +1,5 @@
 import Server from "./classes/Server";
-import ArticlesRoute from "./routes/Articles.route";
+import ArticlesRoute from "./routes/Shoes.route";
 
 const app = new Server(8080);
 
