@@ -5,7 +5,7 @@ import * as mongoose from "mongoose";
 import * as dotenv from "dotenv";
 import * as logger from "morgan";
 /* Create a reusable server class that will bootstrap basic express application. */
-export class Server {
+ class Server {
 
   /* Most of the core properties belove have their types defined by already existing interfaces. IDEs users can jump directly to   interface definition by clicking on its name.  */
   /* protected member will be accessible from deriving classes.  */
