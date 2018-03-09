@@ -2,10 +2,19 @@
 
 Super minimalistic yet fully functional TypeScript, NodeJS API starter project.
 
-### Requirements
+## Requirements
 
+* Docker
 * MongoDB
 * NodeJS version 8+
+
+## Run in Docker
+```
+$ docker-compose up
+```
+Check http://localhost:3000/
+
+## Local development
 
 ### Installation
 
