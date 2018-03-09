@@ -9,10 +9,13 @@ Super minimalistic yet fully functional TypeScript, NodeJS API starter project.
 * NodeJS version 8+
 
 ## Run in Docker
+
 ```
+git clone https://github.com/DmitriyNoa/typescript-nodejs-starter.git
+cd typescript-nodejs-starter
 $ docker-compose up
 ```
-Check http://localhost:3000/
+Check http://localhost:3000/articles
 
 ## Local development
 
