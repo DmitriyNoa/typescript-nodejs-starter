@@ -1,15 +1,17 @@
 version: "2"
 services:
   app:
-    container_name: app
+    container_name: database_app
     restart: always
     build: .
     ports:
       - "3000:8080"
     links:
       - mongo
+    environment:
+            - MONGODB_URI=mongodb://mongodb:27017/nodejs_ts_sample
   mongo:
-    container_name: mongo
+    container_name: mongodb
     image: mongo
     volumes:
       - ./data:/data/db

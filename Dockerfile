@@ -1,10 +1,8 @@
 FROM node:carbon
 
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN mkdir -p /usr/src/app
 
-RUN mkdir -p /opt/app
-
-WORKDIR /opt/app
+WORKDIR /usr/src/app
 
 COPY package.json package.json
 COPY tsconfig.json tsconfig.json
@@ -15,6 +13,6 @@ COPY src src
 RUN npm i
 RUN npm run build
 
-EXPOSE 8080
+EXPOSE 3000
 
-ENTRYPOINT npm run start
+CMD [ "npm", "start" ]
