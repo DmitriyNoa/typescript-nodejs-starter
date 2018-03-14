@@ -6,7 +6,7 @@ import Sizes from "../enums/Sizes";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticle  from "../interfaces/FashionArticle";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
-import { Get, Post, Route, Body, Query, Header, Path, SuccessResponse, Controller } from "tsoa";
+import { Get, Post, Route, Put, Body, Query, Header, Path, SuccessResponse, Controller } from "tsoa";
 
 @Route("Users")
 class ArticlesService {
@@ -36,6 +36,35 @@ class ArticlesService {
       });
   }
 
+
+  @Post()
+  public createArticle(@Body() requestBody: FashionArticle): Promise<FashionArticle> {
+    const articeModel = new ArticleModel(requestBody);
+
+    return articeModel
+      .save()
+      .then((createdArticle: FashionArticleModel) => {
+        return Promise.resolve(createdArticle);
+      })
+      .catch((error: Error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
+
+  @Put("{id}")
+  public updateArticle(id: string, @Body() requestBody: FashionArticle): Promise<FashionArticle> {
+    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price, requestBody.SKU);
+
+    return ArticleModel.findByIdAndUpdate(id, article)
+      .then((updatedArticle: FashionArticleModel) => {
+        return Promise.resolve(updatedArticle);
+      })
+      .catch((error: Error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
 }
 
 export default ArticlesService;

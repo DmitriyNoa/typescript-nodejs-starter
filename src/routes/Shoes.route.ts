@@ -58,12 +58,9 @@ class ArticlesRoute {
     const requestBody = request.body;
     const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price);
 
-    const articeModel = new ArticleModel(article);
-
-    articeModel
-      .save()
+    this.articlesService.createArticle(article)
       .then((createdArticle: FashionArticleModel) => {
-        return response.json(createdArticle);
+        return response.status(204);
       })
       .catch((error: Error) => {
         console.error(error);
@@ -74,9 +71,8 @@ class ArticlesRoute {
   public updateArticle(request: Request, response: Response): void {
     const id = request.params.id;
     const requestBody = request.body;
-    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price, requestBody.SKU);
 
-    ArticleModel.findByIdAndUpdate(id, article)
+    this.articlesService.updateArticle(id, requestBody)
       .then((updatedArticle: FashionArticleModel) => {
         return response.json(updatedArticle);
       })
