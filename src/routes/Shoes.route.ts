@@ -84,8 +84,8 @@ class ArticlesRoute {
 
   public deleteArticle(request: Request, response: Response): void {
     const articleId = request.params.id;
-    ArticleModel.findByIdAndRemove(articleId)
-      .then((res: any) => {
+   this.articlesService.deleteArticle(articleId)
+      .then(() => {
         return response.status(204).end();
       })
       .catch((error: Error) => {

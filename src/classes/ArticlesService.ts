@@ -1,12 +1,8 @@
-import * as express from "express";
-import ArticleType from "../enums/ArticleType";
-import Colors from "../enums/Colors";
 import Shoe from "../classes/Shoe";
-import Sizes from "../enums/Sizes";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
-import FashionArticle  from "../interfaces/FashionArticle";
+import FashionArticle from "../interfaces/FashionArticle";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
-import { Get, Post, Route, Put, Body, Query, Header, Path, SuccessResponse, Controller } from "tsoa";
+import { Get, Post, Route, Put, Body, Delete, Query, Header, Path, SuccessResponse, Controller } from "tsoa";
 
 @Route("Users")
 class ArticlesService {
@@ -59,6 +55,19 @@ class ArticlesService {
     return ArticleModel.findByIdAndUpdate(id, article)
       .then((updatedArticle: FashionArticleModel) => {
         return Promise.resolve(updatedArticle);
+      })
+      .catch((error: Error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
+
+  @Delete("{id}")
+  public deleteArticle(id: string): Promise<void> {
+
+    return ArticleModel.findByIdAndRemove(id)
+      .then((res: any) => {
+        return Promise.resolve();
       })
       .catch((error: Error) => {
         console.error(error);

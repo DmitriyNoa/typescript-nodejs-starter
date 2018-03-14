@@ -190,6 +190,26 @@
 						}
 					}
 				]
+			},
+			"delete": {
+				"operationId": "DeleteArticle",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
 			}
 		}
 	},
