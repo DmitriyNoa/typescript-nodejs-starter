@@ -5,11 +5,14 @@ import Shoe from "../classes/Shoe";
 import Sizes from "../enums/Sizes";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
+import ArticlesService from "../classes/ArticlesService";
 
 class ArticlesRoute {
   public router: Router;
+  private articlesService: ArticlesService;
 
   constructor() {
+    this.articlesService = new ArticlesService();
     this.router = Router();
     this.init();
   }
@@ -30,7 +33,7 @@ class ArticlesRoute {
 
   public getArticles(request: Request, response: Response): void {
     // I'm not a huge fan of JavaScript callbacks hell and expecially of using it in NodeJS, so I'll use promises instead.
-    ArticleModel.find()
+    this.articlesService.getArticles()
       .then((articles: FashionArticleModel[]) => {
         return response.json(articles);
       })
@@ -41,8 +44,7 @@ class ArticlesRoute {
 
   public getArticleById(request: Request, response: Response): void {
     const id = request.params.id;
-    ArticleModel
-      .findById(id)
+    this.articlesService.getArticleById(id)
       .then((article: FashionArticleModel) => {
         return response.json(article);
       })

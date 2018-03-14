@@ -1,0 +1,66 @@
+{
+	"basePath": "/v1",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {},
+	"info": {
+		"title": "typescript-nodejs-sample",
+		"version": "1.0.0",
+		"description": "TypeScript NodeJS sample application",
+		"license": {
+			"name": "MIT"
+		}
+	},
+	"paths": {
+		"/Users": {
+			"get": {
+				"operationId": "GetArticles",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/Users/{id}": {
+			"get": {
+				"operationId": "GetArticleById",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"host": "localhost:3000"
+}
