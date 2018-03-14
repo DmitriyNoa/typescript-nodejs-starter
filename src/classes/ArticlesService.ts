@@ -4,6 +4,7 @@ import Colors from "../enums/Colors";
 import Shoe from "../classes/Shoe";
 import Sizes from "../enums/Sizes";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
+import FashionArticle  from "../interfaces/FashionArticle";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
 import { Get, Post, Route, Body, Query, Header, Path, SuccessResponse, Controller } from "tsoa";
 
@@ -11,7 +12,7 @@ import { Get, Post, Route, Body, Query, Header, Path, SuccessResponse, Controlle
 class ArticlesService {
 
   @Get()
-  public getArticles() {
+  public getArticles(): Promise<FashionArticle[]> {
     return ArticleModel.find()
       .then((articles: FashionArticleModel[]) => {
         return Promise.resolve(articles);
@@ -23,7 +24,7 @@ class ArticlesService {
   }
 
   @Get("{id}")
-  public getArticleById(id: string) {
+  public getArticleById(id: string): Promise<FashionArticle> {
     return ArticleModel
       .findById(id)
       .then((article: FashionArticleModel) => {

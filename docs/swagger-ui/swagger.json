@@ -1,0 +1,146 @@
+{
+	"basePath": "/v1",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"Sizes": {
+			"enum": [
+				"0",
+				"1",
+				"2",
+				"3",
+				"4"
+			],
+			"type": "string"
+		},
+		"Colors": {
+			"enum": [
+				"0",
+				"1",
+				"2",
+				"3",
+				"4"
+			],
+			"type": "string"
+		},
+		"ArticleType": {
+			"enum": [
+				"Fasion",
+				"Electronic",
+				"Digital",
+				"Other"
+			],
+			"type": "string"
+		},
+		"Price": {
+			"properties": {
+				"price": {
+					"type": "number",
+					"format": "double"
+				},
+				"discountPrice": {
+					"type": "number",
+					"format": "double"
+				}
+			},
+			"required": [
+				"price"
+			],
+			"type": "object"
+		},
+		"FashionArticle": {
+			"properties": {
+				"SKU": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"type": {
+					"$ref": "#/definitions/ArticleType"
+				},
+				"price": {
+					"$ref": "#/definitions/Price"
+				},
+				"size": {
+					"$ref": "#/definitions/Sizes"
+				},
+				"color": {
+					"$ref": "#/definitions/Colors"
+				}
+			},
+			"required": [
+				"SKU",
+				"name",
+				"type",
+				"price",
+				"size",
+				"color"
+			],
+			"type": "object"
+		}
+	},
+	"info": {
+		"title": "typescript-nodejs-sample",
+		"version": "1.0.0",
+		"description": "TypeScript NodeJS sample application",
+		"license": {
+			"name": "MIT"
+		}
+	},
+	"paths": {
+		"/Users": {
+			"get": {
+				"operationId": "GetArticles",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/FashionArticle"
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/Users/{id}": {
+			"get": {
+				"operationId": "GetArticleById",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/FashionArticle"
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"host": "localhost:3000"
+}

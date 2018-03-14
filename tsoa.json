@@ -1,6 +1,6 @@
 {
   "swagger": {
-    "outputDirectory": "./docs",
+    "outputDirectory": "./docs/swagger-ui",
     "entryFile": "./src/app.ts",
     "host": "localhost:3000",
     "basePath": "/v1"
