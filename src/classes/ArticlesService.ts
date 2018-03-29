@@ -2,12 +2,14 @@ import Shoe from "../classes/Shoe";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticle from "../interfaces/FashionArticle";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
-import { Get, Post, Route, Put, Body, Delete, Query, Header, Path, SuccessResponse, Controller } from "tsoa";
+import { Get, Post, Route, Put, Body, Delete } from "tsoa";
 import { Validate } from "../decorators/Validate";
+import HATEOAS from "../decorators/HATEOAS";
 
-@Route("Users")
+@Route("articles")
 class ArticlesService {
 
+  @HATEOAS("articles")
   @Get()
   public getArticles(): Promise<FashionArticle[]> {
     return ArticleModel.find()
@@ -32,7 +34,6 @@ class ArticlesService {
         return Promise.reject(error);
       });
   }
-
 
   @Post()
   @Validate([
