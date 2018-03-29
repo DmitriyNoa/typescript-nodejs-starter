@@ -6,8 +6,19 @@ export function Validate(params: Array<any>): any {
       const errors: Array<any> = [];
       const body = arguments[0];
       params.forEach((currentParam: any) => {
-        if (!body[currentParam.param]) {
-          errors.push(currentParam);
+        switch (currentParam.validate) {
+          case "email":
+            const check = new RegExp("@", "g");
+            if (!check.test(body[currentParam.param])) {
+              errors.push(currentParam);
+            }
+          break;
+          case "required":
+          default:
+            if (!body[currentParam.param]) {
+              errors.push(currentParam);
+            }
+          break;
         }
       });
 
