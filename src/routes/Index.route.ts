@@ -13,7 +13,7 @@ class IndexRoute {
       const fullUrl = request.protocol + "://" + request.get("host");
       const meta = this.applicationRoutes.map((resourse: string) => {
         return {
-          rel: resourse.replace(/\//g, ''),
+          rel: resourse.replace(/\//g, ""),
           href: fullUrl + resourse
         };
       });

@@ -19,9 +19,9 @@ import * as logger from "morgan";
   private routes: string[] = [];
 
   /* public modifier is a default and can be omitted. I prefer to always set it, so code  style is more consistent. */
-  public port: number;
+  public port: number | string;
 
-  constructor(port: number = 3000) {
+  constructor(port: number | string = 3000) {
     this.app = express();
     this.port = port;
     this.app.set("port", port);
