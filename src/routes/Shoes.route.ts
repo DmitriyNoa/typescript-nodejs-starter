@@ -6,7 +6,6 @@ import Sizes from "../enums/Sizes";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
 import ArticlesService from "../classes/ArticlesService";
-import { Validate } from "../decorators/Validate";
 
 class ArticlesRoute {
   public router: Router;
@@ -55,17 +54,8 @@ class ArticlesRoute {
       });
   }
 
-  @Validate([
-    {
-      param: "name",
-      validate: "required"
-    }
-  ])
   public createArticle(request: Request, response: Response): void {
-    const requestBody = request.body;
-    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price);
-
-    this.articlesService.createArticle(article)
+    this.articlesService.createArticle(request.body)
       .then((createdArticle: FashionArticleModel) => {
         return response.status(204).end();
       })
