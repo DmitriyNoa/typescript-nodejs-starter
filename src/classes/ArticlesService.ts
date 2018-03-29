@@ -9,8 +9,8 @@ import HATEOAS from "../decorators/HATEOAS";
 @Route("articles")
 class ArticlesService {
 
-  @HATEOAS("articles")
   @Get()
+  @HATEOAS("articles")
   public getArticles(): Promise<FashionArticle[]> {
     return ArticleModel.find()
       .then((articles: FashionArticleModel[]) => {
