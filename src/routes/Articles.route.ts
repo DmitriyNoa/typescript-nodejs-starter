@@ -52,7 +52,7 @@ class ArticlesRoute {
   public createArticle(request: Request, response: Response): void {
     this.articlesService.createArticle(request.body)
       .then((createdArticle: FashionArticleModel) => {
-        return response.status(204).end();
+        return response.json(createdArticle);
       })
       .catch((error: Error) => {
         console.error(error);
@@ -66,7 +66,7 @@ class ArticlesRoute {
 
     this.articlesService.updateArticle(id, requestBody)
       .then((updatedArticle: FashionArticleModel) => {
-        return response.json(updatedArticle);
+        return response.status(204).end();
       })
       .catch((error: Error) => {
         console.error(error);
