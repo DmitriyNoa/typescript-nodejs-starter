@@ -10,6 +10,7 @@ class IndexRoute {
 
   public init() {
     this.router.route("").get((request: Request, response: Response) => {
+      // replace with HATEOAS decorator
       const fullUrl = request.protocol + "://" + request.get("host");
       const meta = this.applicationRoutes.map((resourse: string) => {
         return {
