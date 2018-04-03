@@ -1,9 +1,4 @@
 import { Request, Response, Router } from "express";
-import ArticleType from "../enums/ArticleType";
-import Colors from "../enums/Colors";
-import Shoe from "../classes/Shoe";
-import Sizes from "../enums/Sizes";
-import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
 import ArticlesService from "../classes/ArticlesService";
 

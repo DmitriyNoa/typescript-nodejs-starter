@@ -1,5 +1,5 @@
 import Server from "./classes/Server";
-import ArticlesRoute from "./routes/Shoes.route";
+import ArticlesRoute from "./routes/Articles.route";
 import IndexRoute from "./routes/Index.route";
 const app = new Server(process.env.PORT || 8080);
 
