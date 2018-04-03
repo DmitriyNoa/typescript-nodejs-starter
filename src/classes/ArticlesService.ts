@@ -2,11 +2,12 @@ import Shoe from "../classes/Shoe";
 import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticle from "../interfaces/FashionArticle";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
-import { Get, Post, Route, Put, Body, Delete } from "tsoa";
+import { Get, Post, Route, Put, Body, Delete, Tags } from "tsoa";
 import { Validate } from "../decorators/Validate";
 import HATEOAS from "../decorators/HATEOAS";
 
 @Route("articles")
+@Tags('Articles')
 class ArticlesService {
 
   @Get()

@@ -1,5 +1,5 @@
 {
-	"basePath": "/v1",
+	"basePath": "",
 	"consumes": [
 		"application/json"
 	],
@@ -79,6 +79,21 @@
 				"color"
 			],
 			"type": "object"
+		},
+		"User": {
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"name",
+				"email"
+			],
+			"type": "object"
 		}
 	},
 	"info": {
@@ -90,7 +105,7 @@
 		}
 	},
 	"paths": {
-		"/Users": {
+		"/articles": {
 			"get": {
 				"operationId": "GetArticles",
 				"produces": [
@@ -107,6 +122,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Articles"
+				],
 				"security": [],
 				"parameters": []
 			},
@@ -123,6 +141,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Articles"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -136,7 +157,7 @@
 				]
 			}
 		},
-		"/Users/{id}": {
+		"/articles/{id}": {
 			"get": {
 				"operationId": "GetArticleById",
 				"produces": [
@@ -150,6 +171,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Articles"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -173,6 +197,9 @@
 						}
 					}
 				},
+				"tags": [
+					"Articles"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -201,6 +228,9 @@
 						"description": "No content"
 					}
 				},
+				"tags": [
+					"Articles"
+				],
 				"security": [],
 				"parameters": [
 					{
@@ -211,6 +241,30 @@
 					}
 				]
 			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/User"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": []
+			}
 		}
 	},
 	"produces": [
@@ -218,5 +272,5 @@
 	],
 	"swagger": "2.0",
 	"securityDefinitions": {},
-	"host": "localhost:3000"
+	"host": "localhost:8080"
 }
