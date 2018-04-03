@@ -19,6 +19,7 @@ function HATEOAS(param: any): any {
 }
 
 function addSelfHATEOS(data: Array<any>, metaData: any): Array<any> {
+  const fullUrl = `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}`;
   return data.map((dataItem: any) => {
     return {
       content: {
@@ -27,7 +28,7 @@ function addSelfHATEOS(data: Array<any>, metaData: any): Array<any> {
       _links: [
         {
           rel:  "self",
-          href: `/${metaData}/${dataItem._id}`
+          href: `${fullUrl}/${metaData}/${dataItem._id}`
         }
       ]
     };

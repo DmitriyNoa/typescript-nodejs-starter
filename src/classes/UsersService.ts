@@ -1,8 +1,8 @@
-import { Get, Post, Route, Put, Body, Delete, Controller, Tags } from "tsoa";
+import { Get, Route, Controller, Tags } from "tsoa";
 import User from "./User";
 
 @Route("users")
-@Tags('Users')
+@Tags("Users")
 class UsersService extends Controller {
 
   @Get()

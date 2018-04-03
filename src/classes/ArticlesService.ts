@@ -7,7 +7,7 @@ import { Validate } from "../decorators/Validate";
 import HATEOAS from "../decorators/HATEOAS";
 
 @Route("articles")
-@Tags('Articles')
+@Tags("Articles")
 class ArticlesService {
 
   @Get()
