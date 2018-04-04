@@ -4,13 +4,12 @@ import User from "../classes/User";
 import { RouteHandler, Get, Post } from "../decorators/RouteHandler";
 import Server from "../classes/Server";
 
-@RouteHandler("users")
+@RouteHandler("/users")
 export class UsersRoute {
   public usersService: UsersService;
-  public router: any;
+  public router: Router;
 
   constructor(public app: Server) {
-    console.log("Original constructor");
     this.usersService = new UsersService();
   }
 

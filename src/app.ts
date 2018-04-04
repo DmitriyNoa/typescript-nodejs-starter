@@ -12,6 +12,5 @@ app.addRoute("/", index.router);
 
 const users = new UsersRoute(app);
 console.log(users);
-app.addRoute("/users", users.router);
 
 app.start();

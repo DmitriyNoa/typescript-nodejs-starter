@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 export function RouteHandler(URL: string): any {
-  return function final<T extends { new (...args: any[]): object }>(target: T): T {
+  return function final<T extends { new (...args: any[]): any }>(target: T): T {
     return class Final extends target {
       constructor(...args: any[]) {
         super(...args);
@@ -10,6 +10,7 @@ export function RouteHandler(URL: string): any {
         target.prototype._routes.forEach((route: any) => {
           target.prototype.router.route(route.url)[route.method](route.handler.bind(self));
         });
+        args[0].addRoute(URL, target.prototype.router);
       }
     };
   };
