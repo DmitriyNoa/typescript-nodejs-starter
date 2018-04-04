@@ -1,23 +1,30 @@
 import { Request, Response, Router } from "express";
 import UsersService from "../classes/UsersService";
 import User from "../classes/User";
+import { RouteHandler, Get, Post } from "../decorators/RouteHandler";
+import Server from "../classes/Server";
 
+@RouteHandler("users")
 export class UsersRoute {
-  public router: Router;
-  private usersService: UsersService;
+  private usersService: UsersService = new UsersService();
+  public router: any;
 
-  constructor() {
-    this.router = Router();
-    this.usersService = new UsersService();
-    this.router.route("/")
-      .get(this.getUsers.bind(this));
+  constructor(public app: Server) {
   }
 
+  @Get()
   public getUsers(req: Request, res: Response) {
-    return this.usersService.getUsers()
-      .then((response: User[]) => {
-        return res.json(response);
-      });
+    return res.send("Hello");
+  }
+
+  @Get("/:id")
+  public getUserById(req: Request, res: Response) {
+    return res.send("Hello " + req.params.id);
+  }
+
+  @Post()
+  public getUserById(req: Request, res: Response) {
+    return res.json(req.body);
   }
 }
 
