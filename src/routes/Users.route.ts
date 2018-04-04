@@ -6,15 +6,20 @@ import Server from "../classes/Server";
 
 @RouteHandler("users")
 export class UsersRoute {
-  private usersService: UsersService = new UsersService();
+  public usersService: UsersService;
   public router: any;
 
   constructor(public app: Server) {
+    console.log("Original constructor");
+    this.usersService = new UsersService();
   }
 
   @Get()
   public getUsers(req: Request, res: Response) {
-    return res.send("Hello");
+    return this.usersService.getUsers()
+      .then((response: User[]) => {
+        res.send(response);
+      });
   }
 
   @Get("/:id")
@@ -23,7 +28,7 @@ export class UsersRoute {
   }
 
   @Post()
-  public getUserById(req: Request, res: Response) {
+  public postUser(req: Request, res: Response) {
     return res.json(req.body);
   }
 }

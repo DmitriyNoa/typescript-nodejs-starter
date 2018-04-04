@@ -1,19 +1,17 @@
 import { Router } from "express";
 
 export function RouteHandler(URL: string): any {
-  return <TFunction extends Function>(target: TFunction): TFunction => {
-    const newConstructor: Function = function (args: any) {
-      console.log(`Creating new instance.`);
-      console.log(target.prototype._routes);
-      target.prototype.router = Router();
-      const route = target.prototype._routes[0];
-      target.prototype._routes.forEach((route: any) => {
-        target.prototype.router.route(route.url)[route.method](route.handler);
-      });
+  return function final<T extends { new (...args: any[]): object }>(target: T): T {
+    return class Final extends target {
+      constructor(...args: any[]) {
+        super(...args);
+        const self = this;
+        target.prototype.router = Router();
+        target.prototype._routes.forEach((route: any) => {
+          target.prototype.router.route(route.url)[route.method](route.handler.bind(self));
+        });
+      }
     };
-    newConstructor.prototype = Object.create(target.prototype);
-    newConstructor.prototype.constructor = target;
-    return <TFunction>newConstructor;
   };
 }
 

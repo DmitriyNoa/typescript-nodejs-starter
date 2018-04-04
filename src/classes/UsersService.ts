@@ -6,7 +6,7 @@ import User from "./User";
 class UsersService extends Controller {
 
   @Get()
-  getUsers(): Promise<User[]> {
+  public getUsers(): Promise<User[]> {
     const users = [{name: "John Doe", email: "test@test.com"}];
     return Promise.resolve(users);
   }
