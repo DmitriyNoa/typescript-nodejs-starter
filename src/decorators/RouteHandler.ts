@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-export function RouteHandler(URL: string): any {
+function RouteHandler(URL: string): any {
   return function final<T extends { new (...args: any[]): any }>(target: T): T {
     return class Final extends target {
       constructor(...args: any[]) {
@@ -16,7 +16,7 @@ export function RouteHandler(URL: string): any {
   };
 }
 
-export function Get(param?: string): any {
+function Get(param?: string): any {
   param = param || "/";
   return (target: any, propertyKey: string): TypedPropertyDescriptor<any> => {
     const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
@@ -27,7 +27,7 @@ export function Get(param?: string): any {
   };
 }
 
-export function Post(param?: string): any {
+function Post(param?: string): any {
   param = param || "/";
   return (target: any, propertyKey: string): TypedPropertyDescriptor<any> => {
     const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
@@ -37,3 +37,27 @@ export function Post(param?: string): any {
     return descriptor;
   };
 }
+
+function Put(param?: string): any {
+  param = param || "/";
+  return (target: any, propertyKey: string): TypedPropertyDescriptor<any> => {
+    const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
+    const originalMethod = descriptor.value;
+    target._routes = target._routes || [];
+    target._routes.push({url: param, method: "post",  handler: originalMethod});
+    return descriptor;
+  };
+}
+
+function Delete(param?: string): any {
+  param = param || "/";
+  return (target: any, propertyKey: string): TypedPropertyDescriptor<any> => {
+    const descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
+    const originalMethod = descriptor.value;
+    target._routes = target._routes || [];
+    target._routes.push({url: param, method: "post",  handler: originalMethod});
+    return descriptor;
+  };
+}
+
+export {RouteHandler, Get, Post, Put, Delete};
