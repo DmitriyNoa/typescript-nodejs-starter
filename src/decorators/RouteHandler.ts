@@ -1,8 +1,8 @@
 import { Router } from "express";
 
 function RouteHandler(URL: string): any {
-  return function final<T extends { new (...args: any[]): any }>(target: T): T {
-    return class Final extends target {
+  return function handleROUTE<T extends { new (...args: any[]): any }>(target: T): T {
+    return class HandleRoute extends target {
       constructor(...args: any[]) {
         super(...args);
         const self = this;
