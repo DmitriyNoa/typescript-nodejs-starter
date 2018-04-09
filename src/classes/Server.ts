@@ -16,14 +16,12 @@ import * as logger from "morgan";
   private db: mongoose.Connection;
 
   /* restrict member scope to Server class only */
-  /*  This could be done using generics like syntaxis. You can choose which is looking better for you
-  private routes: Array<express.Router> = []; */
-  private routes: express.Router[] = [];
+  private routes: string[] = [];
 
   /* public modifier is a default and can be omitted. I prefer to always set it, so code  style is more consistent. */
-  public port: number;
+  public port: number | string;
 
-  constructor(port: number = 3000) {
+  constructor(port: number | string = 3000) {
     this.app = express();
     this.port = port;
     this.app.set("port", port);
@@ -45,10 +43,14 @@ import * as logger from "morgan";
   }
 
   public addRoute(routeUrl: string, routerHandler: express.Router): void {
-    if (this.routes.indexOf(routerHandler) === -1) {
-      this.routes.push();
+    if (this.routes.indexOf(routeUrl) === -1) {
+      this.routes.push(routeUrl);
       this.app.use(routeUrl, routerHandler);
     }
+  }
+
+  public getRoutes(): string[] {
+    return this.routes;
   }
 
   private database(): void {

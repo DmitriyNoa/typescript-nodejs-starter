@@ -1,36 +1,22 @@
 import { Request, Response, Router } from "express";
-import ArticleType from "../enums/ArticleType";
-import Colors from "../enums/Colors";
-import Shoe from "../classes/Shoe";
-import Sizes from "../enums/Sizes";
-import { ArticleModel } from "../schemas/FashionArticle.schema";
 import FashionArticleModel from "../interfaces/FashionArticleModel";
+import ArticlesService from "../classes/ArticlesService";
+import { RouteHandler, Get, Post, Put, Delete } from "../decorators/RouteHandler";
+import Server from "../classes/Server";
 
+@RouteHandler("/articles")
 class ArticlesRoute {
   public router: Router;
+  private articlesService: ArticlesService;
 
-  constructor() {
-    this.router = Router();
-    this.init();
+  constructor(public app: Server) {
+    this.articlesService = new ArticlesService();
   }
 
-  // Putting all routes into one place makes it easy to search for specific functionality
-  // As some methods will be called in a context of a different class instance, we need to bind thos methods to current class.
-
-  public init() {
-    this.router.route("/")
-      .get(this.getArticles.bind(this))
-      .post(this.createArticle.bind(this));
-
-    this.router.route("/:id")
-      .get(this.getArticleById.bind(this))
-      .put(this.updateArticle.bind(this))
-      .delete(this.deleteArticle.bind(this));
-  }
-
+  @Get()
   public getArticles(request: Request, response: Response): void {
     // I'm not a huge fan of JavaScript callbacks hell and expecially of using it in NodeJS, so I'll use promises instead.
-    ArticleModel.find()
+    this.articlesService.getArticles()
       .then((articles: FashionArticleModel[]) => {
         return response.json(articles);
       })
@@ -39,10 +25,10 @@ class ArticlesRoute {
       });
   }
 
+  @Get("/:id")
   public getArticleById(request: Request, response: Response): void {
     const id = request.params.id;
-    ArticleModel
-      .findById(id)
+    this.articlesService.getArticleById(id)
       .then((article: FashionArticleModel) => {
         return response.json(article);
       })
@@ -52,14 +38,9 @@ class ArticlesRoute {
       });
   }
 
+  @Post()
   public createArticle(request: Request, response: Response): void {
-    const requestBody = request.body;
-    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price);
-
-    const articeModel = new ArticleModel(article);
-
-    articeModel
-      .save()
+    this.articlesService.createArticle(request.body)
       .then((createdArticle: FashionArticleModel) => {
         return response.json(createdArticle);
       })
@@ -69,14 +50,14 @@ class ArticlesRoute {
       });
   }
 
+  @Put(":/id")
   public updateArticle(request: Request, response: Response): void {
     const id = request.params.id;
     const requestBody = request.body;
-    const article = new Shoe(requestBody.name, requestBody.type, requestBody.size, requestBody.color, requestBody.price, requestBody.SKU);
 
-    ArticleModel.findByIdAndUpdate(id, article)
+    this.articlesService.updateArticle(id, requestBody)
       .then((updatedArticle: FashionArticleModel) => {
-        return response.json(updatedArticle);
+        return response.status(204).end();
       })
       .catch((error: Error) => {
         console.error(error);
@@ -84,10 +65,11 @@ class ArticlesRoute {
       });
   }
 
+  @Delete("/:id")
   public deleteArticle(request: Request, response: Response): void {
     const articleId = request.params.id;
-    ArticleModel.findByIdAndRemove(articleId)
-      .then((res: any) => {
+   this.articlesService.deleteArticle(articleId)
+      .then(() => {
         return response.status(204).end();
       })
       .catch((error: Error) => {

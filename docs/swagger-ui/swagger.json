@@ -1,0 +1,276 @@
+{
+	"basePath": "",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"Sizes": {
+			"enum": [
+				"0",
+				"1",
+				"2",
+				"3",
+				"4"
+			],
+			"type": "string"
+		},
+		"Colors": {
+			"enum": [
+				"0",
+				"1",
+				"2",
+				"3",
+				"4"
+			],
+			"type": "string"
+		},
+		"ArticleType": {
+			"enum": [
+				"Fasion",
+				"Electronic",
+				"Digital",
+				"Other"
+			],
+			"type": "string"
+		},
+		"Price": {
+			"properties": {
+				"price": {
+					"type": "number",
+					"format": "double"
+				},
+				"discountPrice": {
+					"type": "number",
+					"format": "double"
+				}
+			},
+			"required": [
+				"price"
+			],
+			"type": "object"
+		},
+		"FashionArticle": {
+			"properties": {
+				"SKU": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"type": {
+					"$ref": "#/definitions/ArticleType"
+				},
+				"price": {
+					"$ref": "#/definitions/Price"
+				},
+				"size": {
+					"$ref": "#/definitions/Sizes"
+				},
+				"color": {
+					"$ref": "#/definitions/Colors"
+				}
+			},
+			"required": [
+				"SKU",
+				"name",
+				"type",
+				"price",
+				"size",
+				"color"
+			],
+			"type": "object"
+		},
+		"User": {
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"name",
+				"email"
+			],
+			"type": "object"
+		}
+	},
+	"info": {
+		"title": "typescript-nodejs-sample",
+		"version": "1.0.0",
+		"description": "TypeScript NodeJS sample application",
+		"license": {
+			"name": "MIT"
+		}
+	},
+	"paths": {
+		"/articles": {
+			"get": {
+				"operationId": "GetArticles",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/FashionArticle"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Articles"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateArticle",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/FashionArticle"
+						}
+					}
+				},
+				"tags": [
+					"Articles"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "requestBody",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/FashionArticle"
+						}
+					}
+				]
+			}
+		},
+		"/articles/{id}": {
+			"get": {
+				"operationId": "GetArticleById",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/FashionArticle"
+						}
+					}
+				},
+				"tags": [
+					"Articles"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"put": {
+				"operationId": "UpdateArticle",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/FashionArticle"
+						}
+					}
+				},
+				"tags": [
+					"Articles"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "requestBody",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/FashionArticle"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteArticle",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Articles"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/User"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"host": "localhost:8080"
+}

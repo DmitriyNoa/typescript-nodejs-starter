@@ -1,0 +1,13 @@
+{
+  "swagger": {
+    "outputDirectory": "./docs/swagger-ui",
+    "entryFile": "./src/app.ts",
+    "host": "localhost:8080",
+    "basePath": ""
+  },
+  "routes": {
+    "basePath": "",
+    "entryFile": "./src/server.ts",
+    "routesDir": "./src"
+  }
+}

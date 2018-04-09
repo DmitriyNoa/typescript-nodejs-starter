@@ -29,6 +29,7 @@
     "supertest": "^3.0.0",
     "ts-jest": "^22.0.4",
     "tslint": "^5.9.1",
+    "tsoa": "^2.1.4",
     "typescript": "^2.7.1"
   },
   "repository": {
@@ -45,7 +46,8 @@
     "build": "npm run build-ts && npm run tslint",
     "serve-debug": "nodemon --inspect ./dist/app.js",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "jest --forceExit"
+    "test": "jest --forceExit",
+    "docs": "tsoa swagger"
   },
   "author": {
     "name": "DmitriyNoa",
