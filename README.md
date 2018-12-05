@@ -47,7 +47,7 @@ $ npm run start_local
 App should be available now on http://localhost:8080/articles.
 
 ### Add some data to the project
-Use POSTMAN to screate articles by sending POST request to http://localhost:8080/articles.
+Use POSTMAN to create articles by sending POST request to http://localhost:8080/articles.
 ```
 HEADERS:
 [{"key":"Content-Type","value":"application/json","description":"","enabled":true}]
